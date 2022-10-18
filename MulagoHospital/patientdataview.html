@@ -1,0 +1,611 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="Clogo.png" />
+
+  <title>Patient Records</title>
+  <link href="http://localhost/patientrecords/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="http://localhost/patientrecords/assets/css/sb-admin-2.min.css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+ <script src="http://localhost/patientrecords/assets/jquery-3.3.1.min.js"></script>
+
+ <link rel="stylesheet" type="text/css" href="http://localhost/patientrecords/assets/loader.css">
+ 
+ <script src = "http://localhost/patientrecords/assets/js/scripts/bootstrap.js"></script>
+<script src = "http://localhost/patientrecords/assets/js/scripts/jquery.min.js"></script>
+<script src = "http://localhost/patientrecords/assets/js/scripts/dropdown.js"></script>
+<script src = "http://localhost/patientrecords/assets/js/scripts/sidebar.js"></script>
+<script src = "http://localhost/patientrecords/assets/js/scripts/jquery.dataTables.js"></script>
+<script src = "http://localhost/patientrecords/assets/js/scripts/custom.js"></script>
+<script type = "text/javascript">
+	$(document).ready(function() {
+		$('#table').DataTable();
+		$('#table1').DataTable();
+	});
+	
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+  <script src = "http://localhost/patientrecords/assets/js/scripts/jquery.canvasjs.min.js"></script>
+
+
+ <style>
+   .sidenav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #228B28;
+
+
+
+}
+
+
+.main {
+  margin-left: 225px; /* Same as the width of the sidenav */
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+</style>
+
+
+
+</head> 
+
+
+<body id="page-top">
+
+
+ 
+ 
+        
+ <div class='alert-success text-center'><div class="text-center">You are now logged in as <b>admin</b></div></div>  
+
+
+          
+  </div>
+          
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class=" navbar-nav bg-gradient-success sidenav sidebar sidebar-dark accordion " id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="#">
+        <div class="sidebar-brand-icon rotate-n-0">
+           <i class="fas fa-folder-open"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Patient Records</div>
+      </a>
+   
+
+ <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+
+      <!-- Nav Item - for Patient Records Table (link for specific page)-->
+      <li class="nav-item active">
+         <!-- Nav Item - Tables -->
+        <a class="nav-link collapsed " href="http://localhost/patientrecords/admissioncontrol/admitdatatable"> <!-- yung part na http://localhost/patientrecords/ meaning nyan is localhost/patientrecords sinet ko yung default nya sa file n nasa folder ng website na patientrecords/application/config/config.php 
+       
+       sa loob ng file name na config.php sa bandang baba makikita yan
+
+        $config['base_url'] = 'http://localhost/patientrecords/'; tinawag ko yung base_url(); para ilabas sa url yung default or base url which is http://localhost/patientrecords/  kung san kukunin yung website
+        
+        sa loob ng href='' attribute meron http://localhost/patientrecords/admissioncontrol/admitdatatable
+
+        note: si admissioncontrol is the controller then 
+        si admitdatatable naman is yung method yung nasa public function 
+
+        laging setup sa codeigniter yan so sa normal na itsura makikita mo sa url ng browser kung walang 
+        http://localhost/patientrecords/
+         http://localhost/patientrecords/admissioncontrol/admitdatatable
+
+         si admissioncontrol - yan yung controller or sabihin nating middleman, so pagclick mo ng link na 
+
+         Patient Records Table pupunta yung request sa admissioncontrol.php
+       
+         example: ito yun
+
+          class Admissioncontrol extends CI_Controller {
+         
+          then sa loob naman ng controller pupunta sya sa method na admitdatatable kung saan sa loob ng function na yun may mga scripts or codes n kung anu gagawin sa request which is 
+    
+          example:
+
+          public function admitdatatable(){
+              
+            // all codes here
+
+
+              $data['get_data'] = $this->Record_model->get_patient_records($u_id);
+
+              $data['title'] = 'Records Table'; 
+
+               $data['topbar'] = 'navbar-default'; <-- itong part nato filename yan hindi sya normal n word as long as may created na file name navbar-default.php hindi yan magiging normal words, isa syang filename 
+               hindi katulad nung nasa $data['title'] = 'Record Table'; pagwala kang created na filename  halimbawa Record Table.php consider yan na normal words lng
+
+               $data['main_view'] = 'admission/admitdatatable';
+ 
+              $this->load->view('layouts/central_template', $data);
+         
+
+           itong part na to is buong VIEW kung san nakikita ni user yung content ng website so gaya ng sabi ko may tatlong part si Codeigniter 
+           
+           VIEW - user interface, contents, etc.
+           CONTROLLER -  website data process, validations, communication between VIEW and MODEL
+           MODEL - queries for retriving, inserting, updating, deleting informations inside mysql database
+
+
+           } // MOVE ON sa Addusercontrol.php sa may part ng validations duun sa add_users(){} method
+
+
+          }
+
+         -->
+
+          <i class="fas fa-fw fa-table "></i>
+          <span>Patient Records Table</span></a>
+      </li>
+
+      <!-- Nav Item - for Insert Multiple Record (link for specific page) -->
+      <li class="nav-item active">
+         <!-- Nav Item - Tables -->
+        <a class="nav-link collapsed " href="multiplerecordview.php">
+          <i class="fas fa-fw fa-list-alt "></i>
+          <span>Add Records</span></a>
+      </li>
+
+      <!-- Nav Item - for Add Users (link for specific page)-->
+      <li class="nav-item active">
+         <!-- Nav Item - Tables -->
+        <a class="nav-link collapsed " href="adduserview.php">
+          <i class="fas fa-fw fa-user-plus "></i>
+          <span>Add Users</span></a>
+      </li>
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="main d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content"> 
+ 
+      
+    <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+    
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                  
+     <!-- u_user coming from database -->
+
+       <b>admin</b>
+                           </span>
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">   
+             <a class="dropdown-item" href="http://localhost/patientrecords/indexcontrol/changepassupdate">
+             <i class="fas fa-fw fa-key mr-2 text-gray-400"></i>
+               Change Password
+             </a>
+             <a class="dropdown-item" href="http://localhost/patientrecords/indexcontrol/secretquestion">
+             <i class="fas fa-fw fa-user mr-2 text-gray-400"></i>
+                Account Recovery
+             </a>
+
+
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+ 
+
+
+
+ <!-- ito n yung variable na kinomvert n na kay $data['topbar'] need mo lagyan ng $this->load->view(); then sa loob yung variable para maiload nya yung nilalaman ni variable $topbar which is yung script para sa navigation bar  --> 
+      
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+       
+
+       
+
+ 
+  <div class="align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 text-center">Patient Records</h1>
+          </div>
+
+  <div class="row"> <!-- Begin of Row -->
+
+      <div class="col-xl-8 col-md-8 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-auto">
+             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">PATIENT NAME</div>
+             </div>
+                    <div class="col mr-2">
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
+                        Hassan&nbsp&nbsp
+                        Jenna&nbsp&nbsp
+                        Castro                         
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <div class="col-xl-4 col-md-6 mb-4 ml-auto">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-auto">
+               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Hospital Case No.</div>
+             </div>
+                       <div class="col mr-2">
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        P-01                        
+                      </div>
+                    </div>   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+    </div><!-- End of Row -->
+
+
+<div class="row"><!-- Begin Row -->
+ 
+  <!-- First Column -->
+            <div class="col-lg-4">
+
+              <!-- Details -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-success">Details <a style='margin-left: 225px; text-decoration:none;' class='text-secondary' href='http://localhost/patientrecords/admissioncontrol/patient_edit_option/1'> 
+                    <i class="fa fa-edit"></i></a> </h6>        
+                </div>
+               <div class="card-body"> <!--Card Body begin tag  -->
+
+                          
+               <div style="margin-bottom:17px;">
+                <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Address</div>   
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">San Carlos Heights Binangonan Rizal</div>
+               </div>
+
+               <div style="margin-bottom:17px;">
+                <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Age</div>   
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">26</div>
+         </div>
+    
+              <div style="margin-bottom:17px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Birthday</div> 
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">1992-07-03</div>
+        </div>
+               
+               <div style="margin-bottom:17px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">BirthPlace</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">Cainta Rizal</div>
+         </div>
+
+         <div style="margin-bottom:17px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Civil Status</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">Single</div>
+         </div>
+
+         <div style="margin-bottom:17px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Gender</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">Female</div>
+         </div>
+
+         <div style="margin-bottom:18px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Tel/Mobile No.</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">09293932931</div>
+         </div>
+
+          <div style="margin-bottom:18px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Religion</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">Catholic</div>
+         </div>
+
+         <div style="margin-bottom:18px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Occupation</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">Call Center</div>
+         </div>
+
+         <div style="margin-bottom:18px;">
+        <div class="row no-gutters">
+                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Date Added</div>
+                </div>
+        <div class="h5 mb-1 font-weight-bold text-gray-800">2019-03-13</div>
+         </div>
+
+           
+                </div><!--Card body end tag -->
+              </div>
+      
+       </div>
+
+
+
+              <!-- Findings Box -->
+            <div  id="findings" class="col-xl-8 col-lg-4">
+
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                   <h6 class="m-0 font-weight-bold text-success">OPD Findings <a style='margin-left: 450px; text-decoration:none;' class='text-secondary' href='http://localhost/patientrecords/admissioncontrol/add_findings/1#findings'> <i class="fa 
+                   fa-plus"></i></a></h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                   <div class="col-sm-12">
+                  </div>
+                   <div class="table">
+       
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+
+                  <thead>
+                    <tr>
+                      <th class="text-center">History of Present Illness</th>
+                      <th class="text-center">Date Consulted</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+           
+                               
+
+                    <tr>
+
+
+                <td class='text-center'><b><a style='color:green;' href='http://localhost/patientrecords/admissioncontrol/findingsview/36'>Headache</b></td>                <td class='text-center'>2019-04-18</td>     
+                
+                 
+                    </tr>      
+
+                                 
+
+                    <tr>
+
+
+                <td class='text-center'><b><a style='color:green;' href='http://localhost/patientrecords/admissioncontrol/findingsview/44'>*Under Observation</b></td>                <td class='text-center'>2019-05-03</td>     
+                
+                 
+                    </tr>      
+
+                                 
+
+                    <tr>
+
+
+                <td class='text-center'><b><a style='color:green;' href='http://localhost/patientrecords/admissioncontrol/findingsview/45'>Headache</b></td>                <td class='text-center'>2022-09-20</td>     
+                
+                 
+                    </tr>      
+
+                                 
+
+                    <tr>
+
+
+                <td class='text-center'><b><a style='color:green;' href='http://localhost/patientrecords/admissioncontrol/findingsview/46'>eyes</b></td>                <td class='text-center'>2022-09-20</td>     
+                
+                 
+                    </tr>      
+
+                 
+                  </tbody>
+                </table>
+              </div>
+              
+             
+              
+
+                </div> 
+
+              </div>
+                 <div id="admission" class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-success">Admission <a style='margin-left: 550px; text-decoration:none;' class='text-secondary' href='http://localhost/patientrecords/admissioncontrol/admit_form/1#admission'> <i class="fa 
+                   fa-plus"></i></a></h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                <div class="col-sm-12">
+        </div>   
+                  <div class="table">
+
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+
+                  <thead>
+                    <tr>
+                      <th class="text-center">Ward Admitted</th>
+                      <th class="text-center">Admission Date</th>
+                      <th class="text-center">Discharge Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+           
+               
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+           </div>
+    
+  
+
+   
+
+
+</div><!-- End of Row -->
+
+  <!-- ganun din dito ito naman scripts para sa isang bahagi ng website -->
+            
+        </div>
+       
+       </div>
+      <!-- End of Main Content -->
+  <br><br><br><br><br><br><br><br><br><br>
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Clinic Africa KAajjansi 2022</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-success" href="http://localhost/patientrecords/usercontrol/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+
+ <!-- Bootstrap core JavaScript-->
+  <script src="http://localhost/patientrecords/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="http://localhost/patientrecords/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="http://localhost/patientrecords/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="http://localhost/patientrecords/assets/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="http://localhost/patientrecords/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="http://localhost/patientrecords/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="http://localhost/patientrecords/assets/js/demo/datatables-demo.js"></script>
+
+  
+<!-- jQuery library -->
+<script src="http://localhost/patientrecords/assets/printarea/jquery-print-plugin-master/lib/jquery.printThis.js"></script>
+ 
+
+
+</body>
+
+</html>
+
+

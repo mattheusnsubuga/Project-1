@@ -1,0 +1,23 @@
+<button id="clicked" onclick="clicked()">click me</button>
+<script>
+    let periodic = () =>{
+        fetch(`/clinicafrrica/data.php/`, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log('Success:', result);
+            document.getElementById("search").innerHTML = result['message'];
+            console.log(result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    setInterval(periodic, 1000);
+    function clicked(){
+        alert("i have been clicked");
+    }
+    let button = document.querySelector("#clicked");
+    button.click();
+</script>
